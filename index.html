@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<title>Something Given</title>
+<link rel="icon" href="icon.jpg">
+<!-- css file-->
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<!--Swiper-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+<!-- paper js -->
+<script type="text/javascript" src="paper-full.min.js"></script>
+<!-- orientation script -->
+<script type="text/javascript" src="orientation.js"></script>
+<!-- rotating squares-->
+<script type="text/paperscript" src="square.js" canvas="myCanvas3"></script>
+<!--bubble interaction-->
+<script type="text/paperscript" src="bubbles.js" canvas="myCanvas2"></script>
+<script type="text/paperscript" src="tadpoles.js" canvas="myCanvas4"></script>
+
+
+</head>
+<body>
+  <!-- Slider main container -->
+  <div id="hi" class="swiper-container">
+  <div class="swiper-wrapper">
+    <div id="0" class="swiper-slide">
+
+      <div>
+
+        <div class="inner-text">You are connecting to Something Given</div>
+        <div class="inner-text">
+        Please follow directions</div>
+        <div class="inner-text">
+        To move on please swipe the page</div>
+      </div>
+    </div>
+    <div id="s1" class="swiper-slide">
+        <div>
+          <div class="inner-text">Beside you is a wire case attached to the wall</div>
+          <div class="inner-text">
+          Here you can prepare your mobile companion for the encounter ahead</div>
+          <div class="inner-text">(swipe)</div>
+        </div>
+    </div>
+    <div id="s2" class="swiper-slide">
+      <div>
+        <div class="inner-text">There are some chargers</div>
+        <div class="inner-text">How long are you willing to stand here to avoid digital blackout? </div>
+        <div id="battery" class="inner-text"></div>
+
+        <div class="inner-text">(swipe)</div>
+      </div>
+    </div>
+    <div id="s3" class="swiper-slide">
+      <div>
+        <div class="inner-text">When was the last time you cleansed this screen?</div>
+        <div class="inner-text">Dusted away debris from it’s orifices</div>
+        <div class="inner-text">What surfaces has it been in contact with?</div>
+      </div>
+    </div>
+    <div id="s4" class="swiper-slide">
+      <div>
+        <div class="inner-text">You can decorate if you wish</div>
+        <div class="inner-text">How do you think your mechanical companion translates these little faces?
+        </div>
+      </div>
+    </div>
+    <div id= "s5" class="swiper-slide">
+      <div>
+        <div id="OS" class="inner-text"></div>
+        <div class="inner-text">Does it spark joy?</div>
+      </div>
+    </div>
+    <div id= "s6" class="swiper-slide">
+      <div>
+        <div class="inner-text">Your confidant through which you share, watch, work, socialise and play</div>
+    </div>
+    </div>
+    <div id= "s7" class="swiper-slide">
+      <div>
+        <div class="inner-text">Listening, tracking, interpreting, predicting and transfers your personal world</div>
+        <div class="inner-text">Creating a mishapen shadow</div>
+    </div>
+  </div>
+    <div id= "s8" class="swiper-slide">
+      <div>
+        <div class="inner-text">Do you ever think of the algorithms predicting your mood?</div>
+        <div class="inner-text">Or what parts of a machine have learnt from you?</div>
+    </div>
+    </div>
+
+    <div id= "s9"  class="swiper-slide">
+      <div>
+        <div class="inner-text">Now I would like you to stand further away on your own</div>
+        <div class="inner-text">This is an experience for you and your own mechanical assistant</div>
+      </div>
+    </div>
+    <div "s10" class="swiper-slide">
+      <div>
+        <div class="inner-text">To this machine you constantly give information away trading for services</div>
+        <div class="inner-text">Small flicks of fingers and bumps in pockets</div>
+    </div>
+    </div>
+    <div id="s11" class="swiper-slide">
+      <div>
+        <div class="inner-text">Stand facing of the N on the floor</div>
+        <div class="inner-text">Use the compass numbers on the following screen to find South</div>
+    </div>
+    </div>
+    <div id="s12" class="swiper-slide swiper-no-swiping">
+      <p class="inner-text"></p>
+    </div>
+    <div id="s13" class="swiper-slide">
+      <div>
+        <div class="inner-text">Now circle your phone in the air</div>
+        <div class="inner-text">(swipe when done)</div>
+      </div>
+    </div>
+    <div id="s14" class="swiper-slide">
+      <div>
+        <div class="inner-text">Well done</div>
+        <div class="inner-text">Your device is now calibrated</div>
+      </div>
+
+    </div>
+    <div id="s15" class="swiper-slide">
+      <div>
+        <div class="inner-text">I want you to think of an emotional digital interchange you've had in the last month</div>
+        <div class="inner-text">It can be loving, painful, regretful</div>
+      </div>
+    </div>
+    <div id="s16" class="swiper-slide">
+      <div>
+        <div class="inner-text">What was the visceral feeling of the interaction?</div>
+        <div class="inner-text">How did you touch the interface?</div>
+      </div>
+    </div>
+    <div id="s17" class="swiper-slide">
+      <div>
+        <div class="inner-text">On the next page you will be drawing through moving your phone around</div>
+        <div class="inner-text">Learn, explore, create</div>
+        <div class="inner-text">Watch the manifestations of your actions</div>
+      </div>
+    </div>
+    <div id="s18" class="swiper-slide">
+      <canvas id="myCanvas"></canvas>
+    </div>
+    <div id="s19" class="swiper-slide">
+      <div>
+        <div class="inner-text">Think of that interaction</div>
+        <div class="inner-text">What data leaked out of the emotional and into the detached word?</div>
+      </div>
+    </div>
+    <div id="s20" class="swiper-slide">
+      <div>
+      <div class="inner-text">Do you think you have a digital double?</div>
+      <div class="inner-text">Or an inconceivable magnitude of interconnected data sets?</div>
+      <div class="inner-text">How does it exist separated from you?</div>
+    </div>
+    </div>
+    <div id="s21" class="swiper-slide">
+
+      <canvas id="myCanvas2">
+      </canvas>
+    </div>
+    <div id="s22" class="swiper-slide">
+      <div>
+      <div class="inner-text">Do you feel in control of your private sphere?</div>
+    </div>
+    </div>
+    <div id="s22" class="swiper-slide">
+      <div>
+      <div class="inner-text">You can manipulate the next shape with fast gestures</div>
+      <div class="inner-text"> Command the shape and speed with your body</div>
+    </div>
+    </div>
+    <div id="s23" class="swiper-slide">
+      <canvas id="myCanvas3"></canvas>
+    </div>
+    <div id="s22" class="swiper-slide">
+      <div>
+      <div class="inner-text">For our final interaction</div>
+      <div class="inner-text">Lift your phone to the sky as you create an abundance of data tadpoles</div>
+    </div>
+    </div>
+    <div id="s24" class="swiper-slide">
+      <canvas id="myCanvas4"></canvas>
+    </div>
+    <div id="s26" class="swiper-slide">
+      <div>
+      <div class="inner-text">Thank you for your for your exchange</div>
+      <div id="social" class="inner-text">I hope you enjoyed this data dance with your faithful companion</div>
+    </div>
+    </div>
+
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+<script type="text/javascript" src="orientation.js"></script>
+<script>
+
+//initialise globals
+window.onload;
+window.globals = {
+  gx:0, gy:0, gz:0, gvx:0, gvy:0, gvz:0, canvasx: 0, canvasy: 0,
+};
+
+globals.canvasx = window.screen.width;
+globals.canvasy = window.screen.height;
+window.addEventListener("devicemotion", handleMotion, true);
+  //initialise swiper
+  var swiper = new Swiper('.swiper-container');
+  // Get event data
+  swiper.on( 'slideChange', function() {
+
+    if (swiper.realIndex == 0) {
+
+} else if (swiper.realIndex == 2) {
+
+
+} else if (swiper.realIndex == 11) {
+  window.addEventListener("deviceorientation", deviceCompassListener);
+  swiper.allowSlidePrev = false;
+} else if (swiper.realIndex == 13) {
+
+  window.removeEventListener("deviceorientation", deviceCompassListener);
+    window.addEventListener("devicemotion", handleMotion, true);
+} else if (swiper.realIndex == 14){
+  swiper.allowSlidePrev = true;
+  document.body.style.backgroundImage = "repeating-radial-gradient(white, #cc5500 25%, white 50%)";
+  window.addEventListener("deviceorientation", handleOrientation);
+  window.removeEventListener("devicemotion", handleMotion, true);
+} else if (swiper.realIndex == 19){
+  window.addEventListener("devicemotion", handleMotion, true);
+}
+  });
+</script>
+<!-- Line animation script-->
+<script type="text/javascript" src="animations.js"></script>
+</body>
+</html>

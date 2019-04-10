@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Space</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<!--https://www.npmjs.com/package/device-capabilities.js-->
+<!-- normalises gyro https://www.npmjs.com/package/gyronorm -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+<script type="text/javascript" src="paper-full.min.js"></script>
+<!--<script type="text/paperscript" src="bubbles.js" canvas="myCanvas"></script>-->
+
+<!-- Define inlined JavaScript -->
+
+</head>
+<body>
+
+  <!-- Slider main container -->
+  <!-- Slider main container -->
+  <div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="garden">
+          <div class="ball"></div>
+        </div>
+
+</div>
+    <div id="1" class="swiper-slide">
+<canvas id="myCanvas"></canvas>
+
+    </div>
+    <div id="2" class="swiper-slide swiper-no-swiping">
+
+      <p> </p>
+    </div>
+    <div id="3" class="swiper-slide">Slide 4</div>
+    <div class="swiper-slide">Slide 5</div>
+    <div class="swiper-slide">Slide 6</div>
+    <div class="swiper-slide">Slide 7</div>
+    <div class="swiper-slide">Slide 8</div>
+    <div class="swiper-slide">Slide 9</div>
+    <div class="swiper-slide">Slide 10</div>
+  </div>
+</div>
+<!--
+<pre class="output"></pre>
+<pre class="output2"></pre>
+<script src="javascript.js"></script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+window.onload;
+window.globals = {
+  gx:0, gy:0
+};
+  var north = 0;
+  var noNorth = 0;
+  var swiper = new Swiper('.swiper-container');
+  // Get event data
+  swiper.on( 'slideChange', function() {
+    if (swiper.realIndex == 1) {
+      function handleOrientation(event) {
+
+        var p = event.absolute;
+        var x = event.beta;  // In degree in the range [-180,180]
+        var y = event.gamma; // In degree in the range [-90,90]
+        var z = event.alpha;
+        var webkit = event.webkitCompassHeading;
+        var accuracy = event.webkitCompassAccuracy;
+        var mag = event.magnetometer
+
+        // Because we don't want to have the device upside down
+        // We constrain the x value to the range [-90,90]
+        if (x >  90) { x =  90};
+        if (x < -90) { x = -90};
+
+        // To make computation easier we shift the range of
+        // x and y to [0,180]
+        x += 90;
+        y += 90;
+
+        // 10 is half the size of the ball
+        // It center the positioning point to the center of the ball
+        /*ball.style.top  = (maxX*x/180 - 10) + "px";
+        ball.style.left = (maxY*y/180 - 10) + "px";*/
+      globals.gx = x;
+      globals.gy = y;
+        console.log('here: ' + x + " " + y);
+      }
+window.addEventListener('deviceorientation', handleOrientation);
+
+    }
+    else if (swiper.realIndex == 3) {
+
+      function deviceOrientationListener(event) {
+        var alpha    = event.alpha; //z axis rotation [0,360)
+        var beta     = event.beta; //x axis rotation [-180, 180]
+        var gamma    = event.gamma; //y axis rotation [-90, 90]
+        //Check if absolute values have been sent
+        if (typeof event.webkitCompassHeading !== "undefined") {
+          alpha = event.webkitCompassHeading; //iOS non-standard
+          var heading = alpha;
+          document.getElementById("3").innerHTML = heading.toFixed([0]);
+        }
+        else {
+
+          var heading = 360 - alpha; //heading [0, 360)
+          document.getElementById("3").innerHTML = heading.toFixed([0]);
+        }
+
+        // Change backgroud colour based on heading
+        // Green for North and South, black otherwise
+        if (heading > 359 || heading < 1) { //Allow +- 1 degree
+          document.getElementById("3").style = "green";
+          document.getElementById("3").innerHTML = "N"; // North
+          navigator.vibrate([200, 400, 200]);
+
+            north = 1;
+
+
+        }
+        else if (heading > 179 && heading < 181){ //Allow +- 1 degree
+          document.getElementById("3").style = "green";
+          document.getElementById("3").innerHTML = "S"; // South
+          north = 1;
+          swiper.slideTo(3, 100)
+        }
+    else { // Otherwise, use near black
+       document.body.style.backgroundColor = "#161616";
+     }
+    }
+
+    // Check if device can provide absolute orientation data
+    if (window.DeviceOrientationAbsoluteEvent) {
+     window.addEventListener("DeviceOrientationAbsoluteEvent", deviceOrientationListener);
+    } // If not, check if the device sends any orientation data
+    else if(window.DeviceOrientationEvent){
+     window.addEventListener("deviceorientation", deviceOrientationListener);
+    } // Send an alert if the device isn't compatible
+    else {
+     alert("Sorry, try again on a compatible mobile device!");
+    }
+
+    }
+  });
+</script>
+<script type="text/paperscript" canvas="myCanvas">
+// Ported from original Metaball script by SATO Hiroyuki
+// http://park12.wakwak.com/~shp/lc/et/en_aics_script.html
+
+
+
+project.currentStyle = {
+  fillColor: 'black'
+};
+
+var ballPositions = [[255, 129], [610, 73], [486, 363],
+  [117, 459], [484, 726], [843, 306], [789, 615], [1049, 82],
+  [1292, 428], [1117, 733], [1352, 86], [92, 798]];
+
+var handle_len_rate = 2.4;
+var circlePaths = [];
+var radius = 50;
+for (var i = 0, l = ballPositions.length; i < l; i++) {
+  var circlePath = new Path.Circle({
+    center: ballPositions[i],
+    radius: 50
+  });
+  circlePaths.push(circlePath);
+}
+
+var largeCircle = new Path.Circle({
+  center: [676, 433],
+  radius: 100
+});
+circlePaths.push(largeCircle);
+
+view.onFrame = function(event) {
+    // Every frame, rotate the path by 3 degrees:
+    console.log(globals.gx);
+    largeCircle.position.x = globals.gx;
+    largeCircle.position.y = globals.gy;
+    generateConnections(circlePaths);
+}
+
+/*function onMouseMove(event) {
+  largeCircle.position = event.point;
+  generateConnections(circlePaths);
+
+}*/
+
+var connections = new Group();
+function generateConnections(paths) {
+  // Remove the last connection paths:
+  connections.children = [];
+
+  for (var i = 0, l = paths.length; i < l; i++) {
+    for (var j = i - 1; j >= 0; j--) {
+      var path = metaball(paths[i], paths[j], 0.5, handle_len_rate, 300);
+      if (path) {
+        connections.appendTop(path);
+        path.removeOnMove();
+      }
+    }
+  }
+}
+
+generateConnections(circlePaths);
+
+// ---------------------------------------------
+function metaball(ball1, ball2, v, handle_len_rate, maxDistance) {
+  var center1 = ball1.position;
+  var center2 = ball2.position;
+  var radius1 = ball1.bounds.width / 2;
+  var radius2 = ball2.bounds.width / 2;
+  var pi2 = Math.PI / 2;
+  var d = center1.getDistance(center2);
+  var u1, u2;
+
+  if (radius1 == 0 || radius2 == 0)
+    return;
+
+  if (d > maxDistance || d <= Math.abs(radius1 - radius2)) {
+    return;
+  } else if (d < radius1 + radius2) { // case circles are overlapping
+    u1 = Math.acos((radius1 * radius1 + d * d - radius2 * radius2) /
+        (2 * radius1 * d));
+    u2 = Math.acos((radius2 * radius2 + d * d - radius1 * radius1) /
+        (2 * radius2 * d));
+  } else {
+    u1 = 0;
+    u2 = 0;
+  }
+
+  var angle1 = (center2 - center1).getAngleInRadians();
+  var angle2 = Math.acos((radius1 - radius2) / d);
+  var angle1a = angle1 + u1 + (angle2 - u1) * v;
+  var angle1b = angle1 - u1 - (angle2 - u1) * v;
+  var angle2a = angle1 + Math.PI - u2 - (Math.PI - u2 - angle2) * v;
+  var angle2b = angle1 - Math.PI + u2 + (Math.PI - u2 - angle2) * v;
+  var p1a = center1 + getVector(angle1a, radius1);
+  var p1b = center1 + getVector(angle1b, radius1);
+  var p2a = center2 + getVector(angle2a, radius2);
+  var p2b = center2 + getVector(angle2b, radius2);
+
+  // define handle length by the distance between
+  // both ends of the curve to draw
+  var totalRadius = (radius1 + radius2);
+  var d2 = Math.min(v * handle_len_rate, (p1a - p2a).length / totalRadius);
+
+  // case circles are overlapping:
+  d2 *= Math.min(1, d * 2 / (radius1 + radius2));
+
+  radius1 *= d2;
+  radius2 *= d2;
+
+  var path = new Path({
+    segments: [p1a, p2a, p2b, p1b],
+    style: ball1.style,
+    closed: true
+  });
+  var segments = path.segments;
+  segments[0].handleOut = getVector(angle1a - pi2, radius1);
+  segments[1].handleIn = getVector(angle2a + pi2, radius2);
+  segments[2].handleOut = getVector(angle2b - pi2, radius2);
+  segments[3].handleIn = getVector(angle1b + pi2, radius1);
+  return path;
+}
+
+// ------------------------------------------------
+function getVector(radians, length) {
+  return new Point({
+    // Convert radians to degrees:
+    angle: radians * 180 / Math.PI,
+    length: length
+  });
+}
+
+</script>
+<!-- <script type="text/javascript" src="animations.js"></script> -->
+</body>
+</html>
